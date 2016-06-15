@@ -6,3 +6,5 @@ resource_registry:
 parameter_defaults:
   NuageActiveController: '0.0.0.0'
   NuageStandbyController: '0.0.0.0'
+  #Interface name on Compute that is on External network (default: br-ex)
+  NuageNetworkUplinkIntf: 'br-ex'

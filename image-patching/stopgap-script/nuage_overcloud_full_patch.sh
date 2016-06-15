@@ -92,8 +92,12 @@ if [ $2 -eq 8 ]; then
   virt-customize --run-command 'mkdir -p /etc/puppet/modules/nuage/manifests/8_files' -a $1 --memsize $VIRT_CUSTOMIZE_MEMSIZE --selinux-relabel --edit '/usr/lib/systemd/system/rhel-autorelabel.service: $_ = "" if /StandardInput=tty/'
 
   virt-copy-in -a $1 8_files/neutron_plugin_nuage.rb /etc/puppet/modules/nuage/manifests/8_files
+  virt-copy-in -a $1 8_files/nuage.pp /etc/puppet/modules/nuage/manifests/8_files
+  virt-copy-in -a $1 8_files/vrs.pp /etc/puppet/modules/nuage/manifests/8_files
 
   virt-customize --run-command 'cp /etc/puppet/modules/nuage/manifests/8_files/neutron_plugin_nuage.rb /etc/puppet/modules/neutron/lib/puppet/type/neutron_plugin_nuage.rb' -a $1 --memsize $VIRT_CUSTOMIZE_MEMSIZE --selinux-relabel --edit '/usr/lib/systemd/system/rhel-autorelabel.service: $_ = "" if /StandardInput=tty/'
+  virt-customize --run-command 'cp /etc/puppet/modules/nuage/manifests/8_files/nuage.pp /etc/puppet/modules/neutron/manifests/plugins/nuage.pp' -a $1 --memsize $VIRT_CUSTOMIZE_MEMSIZE --selinux-relabel --edit '/usr/lib/systemd/system/rhel-autorelabel.service: $_ = "" if /StandardInput=tty/'
+  virt-customize --run-command 'cp /etc/puppet/modules/nuage/manifests/8_files/vrs.pp /etc/puppet/modules/nuage/manifests/vrs.pp' -a $1 --memsize $VIRT_CUSTOMIZE_MEMSIZE --selinux-relabel --edit '/usr/lib/systemd/system/rhel-autorelabel.service: $_ = "" if /StandardInput=tty/'
 
 fi
 
@@ -270,4 +274,5 @@ if [ "$CONTINUE_SCRIPT" = true ]; then
     echo "Done"
 
 fi
+
 

@@ -12,4 +12,6 @@ parameter_defaults:
   NeutronNuageVSDOrganization: 'organization'
   NeutronNuageBaseURIVersion: 'default_uri_version'
   NeutronNuageCMSId: ''
+  NeutronNuageFIPUnderlay: true
+  NeutronNuagePAT: 'default_enabled'
   UseForwardedFor: true

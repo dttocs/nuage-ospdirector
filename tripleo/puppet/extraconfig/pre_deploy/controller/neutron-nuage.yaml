@@ -15,10 +15,10 @@ parameters:
   NeutronNuageNetPartitionName:
     description: Specifies the title that you will see on the VSD
     type: string
-    default: 'default_Name'
+    default: 'default_name'
 
   NeutronNuageVSDIp:
-    description: IP address of the Virtual Services Directory
+    description: IP address and port of the Virtual Services Directory
     type: string
 
   NeutronNuageVSDUsername:
@@ -42,6 +42,16 @@ parameters:
   NeutronNuageCMSId:
     description: Cloud Management System ID (CMS ID) to distinguish between OS instances on the same VSD
     type: string
+
+  NeutronNuageFIPUnderlay:
+    description: Flag to enable direct attachment to the Physical Underlay network from the VRS on each compute host
+    type: string
+    default: 'false'
+
+  NeutronNuagePAT:
+    description: Flag to enable port address translation in the Nuage Plugin
+    type: string
+    default: 'default_enabled'
 
   UseForwardedFor:
     description: Treat X-Forwarded-For as the canonical remote address. Only enable this if you have a sanitizing proxy.
@@ -68,6 +78,8 @@ resources:
                neutron::plugins::nuage::nuage_vsd_organization: {get_input: NuageVSDOrganization}
                neutron::plugins::nuage::nuage_base_uri_version: {get_input: NuageBaseURIVersion}
                neutron::plugins::nuage::nuage_cms_id: {get_input: NuageCMSId}
+               neutron::plugins::nuage::nuage_fip_underlay: {get_input: NuageFIPUnderlay}
+               neutron::plugins::nuage::nuage_pat: {get_input: NuagePAT}
                nova::api::use_forwarded_for: {get_input: NovaUseForwardedFor}
 
   NeutronNuageDeployment:
@@ -84,6 +96,8 @@ resources:
         NuageVSDOrganization: {get_param: NeutronNuageVSDOrganization}
         NuageBaseURIVersion: {get_param: NeutronNuageBaseURIVersion}
         NuageCMSId: {get_param: NeutronNuageCMSId}
+        NuageFIPUnderlay: {get_param: NeutronNuageFIPUnderlay}
+        NuagePAT: {get_param: NeutronNuagePAT}
         NovaUseForwardedFor: {get_param: UseForwardedFor}
 
 # Specify output parameters that will be available

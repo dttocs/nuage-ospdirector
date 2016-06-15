@@ -13,6 +13,10 @@ parameters:
   NuageStandbyController:
     description: IP address of the Standby Virtualized Services Controller (VSC)
     type: string
+  NuageNetworkUplinkIntf:
+    description: Network uplink interface for external network on VRS
+    type: string
+    default: 'br-ex'
   NuageMetadataPort:
     description: TCP Port to listen for metadata server requests
     type: string
@@ -58,6 +62,7 @@ resources:
               mapped_data:
                nuage::vrs::active_controller: {get_input: ActiveController}
                nuage::vrs::standby_controller: {get_input: StandbyController}
+               nuage::vrs::network_uplink_intf: {get_input: NetworkUplinkIntf}
                nuage::metadataagent::metadata_port: {get_input: MetadataPort}
                nuage::metadataagent::nova_metadata_port: {get_input: NovaMetadataPort}
                nuage::metadataagent::metadata_secret: {get_input: SharedSecret}
@@ -75,6 +80,7 @@ resources:
       input_values: # Values that can be specified later
         ActiveController: {get_param: NuageActiveController}
         StandbyController: {get_param: NuageStandbyController}
+        NetworkUplinkIntf: {get_param: NuageNetworkUplinkIntf}
         MetadataPort: {get_param: NuageMetadataPort}
         NovaMetadataPort: {get_param: NuageNovaMetadataPort}
         SharedSecret: {get_param: NuageMetadataProxySharedSecret}
