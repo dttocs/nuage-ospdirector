@@ -1,4 +1,8 @@
-# OSP Director Integration with Nuage
+# OSP Director 13 Integration with Nuage
+
+# Mellanox CX-5 OVS Offload
+
+Initial release
 
 ## Note: There has been change in the documentation release format starting from OSPD13 + Nuage 5.4.1.
 

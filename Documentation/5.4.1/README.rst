@@ -20,7 +20,7 @@
 .. ..  10/23/18    5.3.3     Jennifer - DOC-2112
 .. ..  10/24/18    5.3.3     Jennifer - DOC-2105 - AVRS
 .. ..  01/22/19    5.4.1     DOC-2202 - Edit file in github
-.. ..  03/04/19    5.4.1     PROD-9386 - Adding Smart NIC Documentation
+.. ..  03/04/19    5.4.1     PROD-9386 - Adding VRS Offload to Mellanox CX-5 Documentation
 
 
 ======================================================
@@ -704,7 +704,7 @@ In OSPD 13 and later, /usr/share/openstack-tripleo-heat-templates/environments/n
         ...
 
 
-7. **(Optional)** To enable Smart NIC Integration, perform the following instrctions:
+7. **(Optional)** To enable VRS Offload (OVRS) with Mellanox CX-5, perform the following instrctions:
 
 :Step 1: Create a new sriov-role.yaml file to deploy SR-IOV Compute nodes. The command used to create this file is:
 
@@ -1016,7 +1016,7 @@ For AVRS, also include following role and environment files.
     openstack overcloud deploy --templates -r /home/stack/templates/ironic-role.yaml -e /home/stack/templates/overcloud_images.yaml -e /home/stack/templates/node-info.yaml -e /home/stack/templates/docker-insecure-registry.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/neutron-nuage-config.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/nova-nuage-config.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/services/ironic.yaml -e /usr/share/openstack-tripleo-heat-templates/environments/services/ironic-inspector.yaml -e /home/stack/templates/ironic.yaml -e /home/stack/templates/ironic-inspector.yaml --ntp-server ntp-server
 
 
-7. For Smart NIC Integration with Nuage, use:
+7. For VRS Offload to Mellanox CX-5 Integration with Nuage, use:
 
 ::
 
@@ -1034,8 +1034,8 @@ where:
    * ``neutron-sriov.yaml`` Neutron SRIOV specific parameter values
    * ``avrs-role.yaml`` Enables services required for Compute Avrs role
    * ``ironic-role.yaml`` Enables Ironic Inspector service for Controller role
-   * ``ovs-hw-offload.yaml`` Enables OVS Hardware Offload on Smart NIC Compute nodes
-   * ``host-config-and-reboot.yaml`` Enables SRIOV and performs Reboot on Smart NIC Compute Nodes
+   * ``ovs-hw-offload.yaml`` Enables OVS Hardware Offload on VRS Offload Compute nodes
+   * ``host-config-and-reboot.yaml`` Enables SRIOV and performs Reboot on VRS Offload Compute Nodes
    * ``ntp-server`` The NTP for overcloud nodes.
 
 
@@ -1355,10 +1355,10 @@ The following parameter is used to enable/disable ipxe on th Controller:
     Used to enable/disable ipxe
 
 
-Parameters Required for Smart NIC
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Parameters Required for VRS Offload
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following parameter is mapped to values in the /etc/default/grub file on the Smart NIC enabled Computes:
+The following parameter is mapped to values in the /etc/default/grub file on the VRS Offload enabled Computes:
 
 ::
 
@@ -1366,7 +1366,7 @@ The following parameter is mapped to values in the /etc/default/grub file on the
     Maps to GRUB_CMDLINE_LINUX parameter. This is used to enable SRIOV feature in kernel.
 
 
-The following parameter is used for Tune-d profile activation on the Smart NIC enabled Computes:
+The following parameter is used for Tune-d profile activation on the VRS Offload enabled Computes:
 
 ::
 
@@ -1374,7 +1374,7 @@ The following parameter is used for Tune-d profile activation on the Smart NIC e
     Tuned Profile to apply to the host
 
 
-The following parameter is mapped to config value required to enable OVS hardware offload on the Smart NIC enabled Computes:
+The following parameter is mapped to config value required to enable OVS hardware offload on the VRS Offload enabled Computes:
 
 ::
 
